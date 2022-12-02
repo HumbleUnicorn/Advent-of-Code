@@ -2,23 +2,23 @@
 # AOC 2022 - Day 1
 # https://adventofcode.com/2022/day/1
 
+'''
+# //READ TEST DATA//'
 
-# //SOLUTION WITH TEST DATA//'
-"""
 data=[]
 with open('day1test22.txt') as f: 
     for lines in f:
-        data.append(lines)
-    
-"""       
-# //SOLUTION WITH TEST DATA//
+        data.append(lines) 
+'''
+       
+# //READ PUZZLE DATA//
 data=[]
 with open('day1data22.txt') as f: 
     for lines in f:
         data.append(lines)            
 
 
-# Read data and convert lines to int
+# Convert lines from 'str' to 'int'
 n=len(data)
 i=0
 for i in range(n):
@@ -46,7 +46,7 @@ elf = namedtuple('elf', ['elfNo','calCarried'])
 elves = []
 
 
-#Generate and sort instantiates 
+#Generate and Sort 'elf' Instantiates 
 for i in range(n):                          #repeat loop 'n' number of times
     if data[i]>0:                           #IF list item > 0 
         cal+=data[i]                        #THEN add val to 'cal' sum
@@ -55,6 +55,7 @@ for i in range(n):                          #repeat loop 'n' number of times
         j+=1                                #Add 1 to elf counter
         cal=0                               #Reset calorie counter to 0
     i+=1                                    #Add 1 to loop iterator
+
 elves.sort(key=lambda x: getattr(x,'calCarried'), reverse=True)
 
 
@@ -66,7 +67,7 @@ elfNo=maxCalCarried.elfNo
 print('SOLUTION PART 1:',maxCal,'cal, Elf No',elfNo)                         
 
 
-# //PART 1: Max Cal Carried By Sum of Three Elves
+# //PART 2: Max Cal Carried By Sum of Three Elves
 maxCalCarried = elves[:3]
 maxCal=[]
 elfNo=[]

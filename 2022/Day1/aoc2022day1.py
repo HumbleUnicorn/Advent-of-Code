@@ -86,9 +86,7 @@ print('PART 2:',sum(max3cal),'calories is carreid by the top 3 elves')
 
     
 
-    
-print(tupe(elves))
-
+  
 
         
         
