@@ -3,10 +3,10 @@
 # https://adventofcode.com/2022/day/2
 
 '''
-# //READ TEST DATA//'
+# //READ TEST DATA//
 
 data=[]
-with open('day2test22.txt') as f: 
+with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/inputs/2022/t02.txt') as f: 
     for lines in f:
         data.append(lines) 
 print(data)
@@ -15,12 +15,12 @@ print(data)
     
 # //READ PUZZLE DATA//
 data=[]
-with open('day2data22.txt') as f: 
+with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/inputs/2022/d02.txt') as f: 
     for lines in f:
         data.append(lines) 
 
 
-# //SCORING FUNCTION//
+# //SCORING FUNCTIONS//
 def playRPS_part1(opp,me,i):
     score={'R':1, 'P':2, 'S':3, 'W':6, 'L':0, 'D':3}
     if me[i] == 'X':
@@ -96,11 +96,11 @@ rps=[]
 for i in range(n):
     rps.append(playRPS_part1(opp,me,i))
 #print(rps)      
-print(sum(rps))
+print('SOLUTION PART 1:',sum(rps))
 
 i=0
 rps=[]
 for i in range(n):
     rps.append(playRPS_part2(opp,me,i))
 #print(rps)      
-print(sum(rps))
+print('SOLUTION PART 2:',sum(rps))

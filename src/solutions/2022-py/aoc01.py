@@ -6,14 +6,14 @@
 # //READ TEST DATA//'
 
 data=[]
-with open('day1test22.txt') as f: 
+with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/src/day1test22.txt') as f: 
     for lines in f:
         data.append(lines) 
 '''
        
 # //READ PUZZLE DATA//
 data=[]
-with open('day1data22.txt') as f: 
+with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/src/day1data22.txt') as f: 
     for lines in f:
         data.append(lines)            
 
