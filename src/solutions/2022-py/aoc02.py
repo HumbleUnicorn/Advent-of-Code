@@ -6,7 +6,7 @@
 # //READ TEST DATA//
 
 data=[]
-with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/inputs/2022/t02.txt') as f: 
+with open('t02.txt') as f: 
     for lines in f:
         data.append(lines) 
 print(data)
@@ -15,7 +15,7 @@ print(data)
     
 # //READ PUZZLE DATA//
 data=[]
-with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/inputs/2022/d02.txt') as f: 
+with open('d02.txt') as f: 
     for lines in f:
         data.append(lines) 
 

@@ -5,13 +5,13 @@
 
 # //READ DATA//
 test=[]
-with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/inputs/2021/t01.txt') as f: 
+with open('t01.txt') as f: 
     for lines in f:
         test.append(lines)
 test=[int(i) for i in test]
 
 data=[]
-with open('C:/Users/ruthw/OneDrive/Documents/Side Quests/Advent-of-Code/inputs/2021/d01.txt') as f: 
+with open('d01.txt') as f: 
     for lines in f:
         data.append(lines)
 data=[int(i) for i in data]
