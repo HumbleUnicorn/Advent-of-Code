@@ -4,6 +4,7 @@
 
 
 # //READ DATA//
+'''
 with open('t05a.txt') as f: 
     testA=[]
     for lines in f: 
@@ -13,36 +14,37 @@ with open('t05b.txt') as f:
     testB=[]
     for lines in f: 
         testB.append(lines.replace('\n',''))   
+'''
           
-with open('d05a.txt') as f: 
+with open('d05a.txt') as f:                 #Includes only lines of crate arrangment
     day5A=[]
     for lines in f:
         day5A.append(lines.replace('\n',''))
 
-with open('d05b.txt') as f: 
+with open('d05b.txt') as f:                 #Includes only lines of move instructions 
     day5B=[]
     for lines in f:
         day5B.append(lines.replace('\n',''))        
 
 def parseStacks(run_data):   
-    crateCol=run_data       #name run_data
-    n=len(crateCol)         #number of lines in run_data
-    m=len(crateCol[0])      #number of bits per line in run_data
-    col=1                   #crate column counter iterator
-    S={}                    #dict of {stack:crates}
-    s=[]                    #list of keys
+    d=run_data                              #assign input data
+    n=len(d)                                #number of lines in 'd'
+    m=len(d[0])                             #number of bits per line in 'd'
+    col=1                                   #crate column counter iterator
+    S={}                                    #dict of {stackName:crateList}
+    s=[]                                    #list of keys
     while col <= m-1: 
-        row=n-1
-        cL=[]                #list of crates in stack 's'
+        row=n-1                             #row counter iterator
+        cL=[]                               #list of crates in stack 's'
         while row>=0:
-            if row == n-1:
-                sN=str(crateCol[row][col])
-            elif crateCol[row][col] != ' ':
-                cL=cL+list(crateCol[row][col])
+            if row == n-1:                  #last row contains stackName
+                sN=str(d[row][col])
+            elif d[row][col] != ' ':        #every other row contains Crates
+                cL=cL+list(d[row][col])
             row-=1
-        stack={sN:cL}
-        S.update(stack)
-        s.append(sN)
+        stack={sN:cL}                   
+        S.update(stack)                     #S={'sN':[cL], 'sN':[CL], ...}
+        s.append(sN)                        #s=['sN','sN'...] keys only
         col+=4 
     return[S,s]
 
@@ -78,41 +80,10 @@ def moveCrate9001(move,stackDict):
         S[f].pop()
     return
 
-
-# //PART 1 WITH TEST DATA//
-S=parseStacks(testA)[0]             #Dictionary {stackName:crateList}
-s=parseStacks(testA)[1]             #List of keys
-moveInst=parseMoveInst(testB)       #[int(n), fromName (f), toName (t)]
-       
-top=str()  
-for move in moveInst:               #execute moves 
-    moveCrate(move,S)
-    #print(S)
-for name in s:
-    n = len(S[name])-1              #identify top crates in each stack
-    top=top+str(S[name][n])             
-print('TEST 1:',top)
-
-
-# //PART 2 WITH TEST DATA//
-S=parseStacks(testA)[0]             #Dictionary {stackName:crateList}
-s=parseStacks(testA)[1]             #List of keys
-moveInst=parseMoveInst(testB)       #[int(n), fromName (f), toName (t)]
-      
-top=str()  
-for move in moveInst:               #execute moves 
-    moveCrate9001(move,S)
-    #print(S)
-for name in s:
-    n = len(S[name])-1              #identify top crates in each stack
-    top=top+str(S[name][n])             
-print('TEST 2:',top)
-
-
 # //PART 1 WITH PUZZLE DATA//
 S=parseStacks(day5A)[0]             #Dictionary {stackName:crateList}
 s=parseStacks(day5A)[1]             #List of keys
-moveInst=parseMoveInst(day5B)       #[int(n), fromName (f), toName (t)]
+moveInst=parseMoveInst(day5B)       #[int(n), fromName(f), toName(t)]
        
 top=str()  
 for move in moveInst:               #execute moves 
@@ -127,7 +98,7 @@ print('SOLUTION PART 1:',top)
 # //PART 2 WITH PUZZLE DATA//
 S=parseStacks(day5A)[0]             #Dictionary {stackName:crateList}
 s=parseStacks(day5A)[1]             #List of keys
-moveInst=parseMoveInst(day5B)       #[int(n), fromName (f), toName (t)]
+moveInst=parseMoveInst(day5B)       #[int(n), fromName(f), toName(t)]
       
 top=str()  
 for move in moveInst:               #execute moves 
