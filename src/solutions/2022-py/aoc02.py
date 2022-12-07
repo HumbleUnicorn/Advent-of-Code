@@ -2,17 +2,17 @@
 # AOC 2022 - Day 2
 # https://adventofcode.com/2022/day/2
 
-'''
-# //READ TEST DATA//
 
+# //READ TEST DATA//
+'''
 data=[]
 with open('t02.txt') as f: 
     for lines in f:
         data.append(lines) 
 print(data)
-''' 
+'''
 
-    
+   
 # //READ PUZZLE DATA//
 data=[]
 with open('d02.txt') as f: 
@@ -88,7 +88,6 @@ for i in range(n):
     opp.append(data[i][0])
     me.append(data[i][2])     
 #print(opp,me)    
-
 
 # //RUN & STORE SCORING FUNCTION//
 i=0
