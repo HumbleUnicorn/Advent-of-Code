@@ -4,7 +4,7 @@
 
 
 # //READ DATA//
-'''
+
 with open('t05a.txt') as f: 
     testA=[]
     for lines in f: 
@@ -14,7 +14,6 @@ with open('t05b.txt') as f:
     testB=[]
     for lines in f: 
         testB.append(lines.replace('\n',''))   
-'''
           
 with open('d05a.txt') as f:                 #Includes only lines of crate arrangment
     day5A=[]
