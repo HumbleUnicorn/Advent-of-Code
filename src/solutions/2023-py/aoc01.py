@@ -6,7 +6,7 @@
 # //INPUT DATA//
 
 day1=[]
-with open('d01a.txt') as f: 
+with open('inputs/d01.txt') as f: 
     for lines in f:
         day1.append(lines) 
 
