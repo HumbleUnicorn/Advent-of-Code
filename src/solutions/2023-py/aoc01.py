@@ -1,30 +1,64 @@
+# =============================================================================
 # Ruth Wertz
 # AOC 2023 - Day 1
 # https://github.com/HumbleUnicorn/Advent-of-Code/blob/main/src/solutions/2023-py/aoc01.py
+# =============================================================================
 
 
-# //INPUT DATA//
+# =============================================================================
+# Part 1 Outline
+#
+# for line in data
+#     find first digit in line
+#         store as str
+#     find last digit in line
+#         store as string
+#     define num as str(first+last)
+#         append to list as int(str)
+# sum list
+#     print sum
+#
+# Part 2 Outline
+#
+# for line in data
+#     find first digit **or str('digit')** in line
+#         store as str
+#     find last digit **or str('digit')** in line
+#         store as string
+#     define num as str(first+last)
+#         append to list as int(str)
+# sum list
+#     print sum
+# =============================================================================
+
+
+# =============================================================================
+#  //INPUT DATA//
+# =============================================================================
 
 day1=[]
-with open('inputs/d01.txt') as f: 
+with open('inputs/d01.txt') as f:
     for lines in f:
-        day1.append(lines) 
+        day1.append(lines)
 
 test1a=['1abc2','pqr3stu8vwx','a1b2c3d4e5f','treb7uchet']
-test1b=['two1nine','eightwothree','abcone2threexyz','xtwone3four','4nineeightseven2','zoneight234','7pqrstsixteen']        
- 
+test1b=['two1nine','eightwothree','abcone2threexyz','xtwone3four','4nineeightseven2','zoneight234','7pqrstsixteen']
+
 dgts = ['1','2','3','4','5','6','7','8','9']
 nums = ['one','two','three','four','five','six','seven','eight','nine']
 alln = dgts + nums
-         
-# // DEFINE FUNCTIONS // 
+
+
+# =============================================================================
+#  // DEFINE FUNCTIONS //
+# =============================================================================
 
 def firstDigit(line,nList):
   a = len(line)
   for n in nList:
-    if n in line: 
+    if n in line:
       pos = line.find(n)
-      if pos <= a: 
+      if pos <= a:
         a = pos
         val = n
       if val in nums:
@@ -38,7 +72,7 @@ def lastDigit(line,nList):
   for n in nList:
     if n in line:
       pos = line.rfind(n)
-      if pos >= b: 
+      if pos >= b:
         b = pos
         val = n
       if val in nums:
@@ -55,9 +89,10 @@ def calVals(data,nList):
     return(vals)
 
 
-# // TEST OUTPUT //
+# =============================================================================
+#  // TEST OUTPUT //
+# =============================================================================
 
-'''
 values = calVals(test1a,dgts)
 test_total = sum(values)
 
@@ -67,9 +102,11 @@ values = calVals(test1b,alln)
 test_total = sum(values)
 
 print(f'Part 2: Test total = {test_total}')
-'''
 
-# // PUZZLE OUTPUT //
+
+# =============================================================================
+#  // PUZZLE OUTPUT //
+# =============================================================================
 
 values = calVals(day1,dgts)
 total = sum(values)

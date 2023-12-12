@@ -1,251 +1,203 @@
+# =============================================================================
 # Ruth Wertz
 # AOC 2023 - Day 2
 # https://github.com/HumbleUnicorn/Advent-of-Code/blob/main/src/solutions/2023-py/aoc02.py
+# =============================================================================
 
 
-# //INPUT DATA//
+# =============================================================================
+# Part 1 Outline
+#
+# define limits: rMax,gMax,bMax,sumMax
+# for game in gameData:
+#    parse to [game id, [str], [str], etc.]
+# for game in gameData:
+#    parse to [game id, [r,g,b,sum], [r,g,b,sum], etc.]
+# for game in gameData:
+#    read Trial return True if possible, False if not
+#   
+# 
+# Part 2 Outline
+#
+# for line in data
+#     find first digit **or str('digit')** in line
+#         store as str
+#     find last digit **or str('digit')** in line
+#         store as string
+#     define num as str(first+last)
+#         append to list as int(str)
+# sum list
+#     print sum
+# =============================================================================
+
+
+# =============================================================================
+#  //INPUT DATA//
+# =============================================================================
+
 day2=[]
 with open('inputs/d02.txt') as f: 
     for lines in f:
         day2.append(lines) 
         
-test2a=['Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green\n','Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue\n',
+test2=['Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green\n',
+        'Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue\n',
         'Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red\n',
         'Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n',
         'Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green']
 
-#for lines in test2a:
-#    print(lines)
-#for lines in day2:
-#    print(lines)
 
-cntMax = [12,13,14,sum([13,14,15])]
+lim1 = [12,13,14,sum([13,14,15])]
 
-# // DEFINE FUNCTIONS // 
 
-def games(data):
-    games=[]
-    for line in data:
-        game = line.replace('Game ','')
-        game = game.replace(' ','')
+# =============================================================================
+#  // DEFINE FUNCTIONS // 
+# =============================================================================
+
+def gameLog(data):
+    gl = []
+    for game in data:
+        game = game.replace('Game ','')
         game = game.replace(':', ';')
-        game = game.replace('\n','')
-        game = game.split(';'); 
-        games.append(game)
-    return(games)
-
-def gameLog(games):
-    gLog=[]
-    for game in games:
-        gID = int(game[0])
-        tNo = len(game)-1
-        gLog.append([gID, tNo])
-    return(gLog)
-
-def gameTrials(games):
-    trials=[]
-    for game in games:
-        n = len(game)
-        gID = int(game[0])
-        for i in range(1,n):
-            tID=i
+        game = game.replace('\n','') 
+        game = game.split(';')
+        game[0] = int(game[0])
+        gl.append(game)     
+    for game in gl:
+        for i in range(len(game)): 
             trial = game[i]
-            trials.append([gID,tID,trial])
-    return(trials)   
+            if type(trial) == str:
+                game.pop(i)
+                trial = trial.split(',')
+                game.insert(i, trial)
+        for i in range(1,len(game)):
+            trial = game[i]
+            n = len(trial)
+            for j in range(n):
+                cubes = trial[j]
+                trial.pop(j)
+                cubes = cubes.strip()
+                trial.insert(j, cubes)
+    return(gl)
 
-def trialPulls(trials):
-    pulls=[]
-    for trial in trials:
-        gID = trial[0]
-        tID = trial[1]
-        p = trial[2]
-        p = p.split(',')
-        pull = [gID,tID,p]
-        pulls.append(pull) 
-    return(pulls)
-                
-def pullCounts(pulls):
-    counts=[]
-    for pull in pulls: 
-        gID = pull[0]
-        tID = pull[1]
-        pCnts = pull[2]
-        for cnt in pCnts:
+def gameCounts(gameData):
+    gc = []
+    for game in gameData:
+        gID = game[0]
+        trials = [gID]
+        for i in range(1,len(game)):
+            trial = game[i]
             r = 0
             g = 0
             b = 0
-            if 'red' in cnt:
-                r = cnt.replace('red','')
-                r = int(r)
-            elif 'green' in cnt:
-                g = cnt.replace('green','')
-                g = int(g)
-            elif 'blue' in cnt:
-                b = cnt.replace('blue','')
-                b = int(b)
-            s = r + g + b
-            count = [gID, tID, r, g, b, s]
-            counts.append(count)
-    return(counts)
+            for j in range(len(trial)):
+                c = trial[j]
+                c = c.strip()
+                if 'red' in c:
+                    c = c.replace(' red','')
+                    r = int(c)
+                if 'green' in c:
+                    c = c.replace(' green','')
+                    g = int(c)
+                if 'blue' in c:
+                    c = c.replace(' blue','')
+                    b = int(c)
+                s = r + g + b
+            trials.append([r,g,b,s])
+        gc.append(trials)
+    return(gc)
 
-def trialCounts(n,m,counts):
-    tCounts=[]
-    for i in range(n):
-        for j in range(m):
-            gID = i+1
-            tID = j+1
-            r = 0
-            g = 0
-            b = 0
-            s = 0
-            for n in counts:
-                if n[0] == gID and n[1] == tID:
-                    r += n[2]
-                    g += n[3]
-                    b += n[4]
-                    s += n[5]
-            tSums = [gID,tID,r,g,b,s]
-            tCounts.append(tSums)
-    return(tCounts)
-
-def trialsPossible(n,cntMax,tCounts):
-    tPoss = []
-    rMax = cntMax[0]
-    gMax = cntMax[1]
-    bMax = cntMax[2]
-    sMax = cntMax[3]
-    for i in range(n):
-        poss = [i+1]
-        for line in tCounts:
-            gID = line[0]
-            r = line[2]
-            g = line[3]
-            b = line[4]
-            s = line[5]
-            if gID == i+1 and s > 0:
-                if r<=rMax and g<=gMax and b<=bMax and s<=sMax:
-                    poss.append(True)
-                else:
-                    poss.append(False)
-        tPoss.append(poss)
-    return(tPoss)
-
-def gamesPossible(tPoss):
-    gPoss = []
-    for line in tPoss:
-        if line.count(False) > 0:
+def gamesPossible(gameLimits,gameData): 
+    gp = []
+    gIDs = []
+    rMax = gameLimits[0]
+    gMax = gameLimits[1]
+    bMax = gameLimits[2]
+    sMax = gameLimits[3]
+    for game in gameData:
+        gID = game[0]
+        log = [gID]
+        for i in range(1, len(game)):
+            trial = game[i]
+            r = trial[0]
+            g = trial[1]
+            b = trial[2]
+            s = trial[3]
+            if r<=rMax and g<=gMax and b<=bMax and s<=sMax:
+                log.append(True)
+            else:
+                log.append(False)
+        gp.append(log)
+    for game in gp:
+        if game.count(False) > 0:
             next
         else:
-            gPoss.append(line[0])   
-    return(gPoss)
+            gIDs.append(game[0])
+    return(gIDs)
 
-'''        
-# // TEST OUTPUT //
-
-games = games(test2a)
-#for game in games:
-    #print(game)  
-
-gLog = gameLog(games)
-#for line in gLog:
-    #print(line)
-
-n = 0 #max game number
-m = 0 #max trials per game    
-for log in gLog:
-    if log[0] > n:
-        n = log[0]
-    if log[1] > m:
-        m = log[1]
-    
-trials = gameTrials(games)
-#for trial in trials:
-    #print(trial)
-
-pulls = trialPulls(trials)
-#for pull in pulls:
-    #print(pull) 
-
-counts = pullCounts(pulls)
-#for count in counts:
-    #print(count)
-
-tCounts = trialCounts(n,m,counts)
-#for line in tCounts:
-    #print(line)
-    
-tPoss = trialsPossible(n,cntMax,tCounts)
-#for line in tPoss:
-    #print(line)  
-
-gPoss = gamesPossible(tPoss)
-#print(gPoss)
-print(f'Test Part 1 - Sum of Possible Games = {sum(gPoss)}')
-'''
-
-# // PUZZLE OUTPUT //   
-            
-games = games(day2)
-#for game in games:
-    #print(game)  
-
-gLog = gameLog(games)
-#for line in gLog:
-    #print(line)
-
-n = 0 #max game number
-m = 0 #max trials per game    
-for log in gLog:
-    if log[0] > n:
-        n = log[0]
-    if log[1] > m:
-        m = log[1]
-    
-trials = gameTrials(games)
-#for trial in trials:
-    #print(trial)
-
-pulls = trialPulls(trials)
-#for pull in pulls:
-    #print(pull) 
-
-counts = pullCounts(pulls)
-#for count in counts:
-    #print(count)
-
-tCounts = trialCounts(n,m,counts)
-#for line in tCounts:
-    #print(line)
-    
-tPoss = trialsPossible(n,cntMax,tCounts)
-#for line in tPoss:
-    #print(line)  
-
-gPoss = gamesPossible(tPoss)
-#print(gPoss)
-print(f'Part 1 - Sum of Possible Games = {sum(gPoss)}')    
-                    
-            
-    
-
-    
-
-
-
-
-
-   
-    
+def minPossible(gameData):
+    power = []
+    for game in gameData:
+        r = 0
+        g = 0
+        b = 0
+        for i in range(1,len(game)):
+            trial = game[i]
+            rT = trial[0]
+            gT = trial[1]
+            bT = trial[2]
+            if rT > r:
+                r = rT
+            if gT > g:
+                g = gT
+            if bT > b:
+                b = bT
+        power.append(r*g*b)
+    return(power)
         
-        
-        
-    
-    
-        
-        
+ 
+# =============================================================================
+#  // TEST OUTPUT //
+# =============================================================================
 
-            
-            
-    
+gLog = gameLog(test2)
+# for game in gLog:
+#     print(game)  
 
+gCounts = gameCounts(gLog)
+# for game in gCounts:
+#     print(game)
+
+gIDs = gamesPossible(lim1,gCounts)
+# for game in gIDs:
+#     print(game)
     
+print(f'Test Part 1 - Sum of Possible Games = {sum(gIDs)}')
+
+gPower = minPossible(gCounts)
+# for game in gPower:
+#     print(game)
+print(f'Test Part 2 - Sum of Possible Games = {sum(gPower)}')
+
+# =============================================================================
+#  // PUZZLE OUTPUT //
+# =============================================================================
+
+gLog = gameLog(day2)
+# for game in gLog:
+#     print(game)  
+
+gCounts = gameCounts(gLog)
+# for game in gCounts:
+#     print(game)
+
+gIDs = gamesPossible(lim1,gCounts)
+# for game in gIDs:
+#     print(game)
+    
+print(f'Part 1 - Sum of Possible Games = {sum(gIDs)}')
+
+gPower = minPossible(gCounts)
+# for game in gPower:
+#     print(game)
+print(f'Test Part 2 - Sum of Possible Games = {sum(gPower)}')
