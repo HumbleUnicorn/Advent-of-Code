@@ -10,24 +10,27 @@
 #
 # define limits: rMax,gMax,bMax,sumMax
 # for game in gameData:
-#    parse to [game id, [str], [str], etc.]
+#     parse to [game id, [str], [str], etc.]
 # for game in gameData:
-#    parse to [game id, [r,g,b,sum], [r,g,b,sum], etc.]
+#     parse to [game id, [r,g,b,sum], [r,g,b,sum], etc.]
 # for game in gameData:
-#    read Trial return True if possible, False if not
+#     read Trial return True if possible, False if not
+#     append game ID if all are trials are True
+#     print game ID sum
 #   
-# 
 # Part 2 Outline
 #
-# for line in data
-#     find first digit **or str('digit')** in line
-#         store as str
-#     find last digit **or str('digit')** in line
-#         store as string
-#     define num as str(first+last)
-#         append to list as int(str)
-# sum list
-#     print sum
+# for game in gameData:
+#     parse to [game id, [str], [str], etc.]
+# for game in gameData:
+#     parse to [game id, [r,g,b,sum], [r,g,b,sum], etc.]
+# for game in gameData:
+#     r=g=b=0
+#     read each Trial, 
+#         IF trial value is higher than stored value 
+#             retain higher value
+#     append power as r*g*b per game 
+#     print power sum    
 # =============================================================================
 
 
@@ -45,7 +48,6 @@ test2=['Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green\n',
         'Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red\n',
         'Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n',
         'Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green']
-
 
 lim1 = [12,13,14,sum([13,14,15])]
 
