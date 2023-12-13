@@ -181,6 +181,7 @@ gPower = minPossible(gCounts)
 #     print(game)
 print(f'Test Part 2 - Sum of Possible Games = {sum(gPower)}')
 
+
 # =============================================================================
 #  // PUZZLE OUTPUT //
 # =============================================================================
@@ -203,3 +204,4 @@ gPower = minPossible(gCounts)
 # for game in gPower:
 #     print(game)
 print(f'Test Part 2 - Sum of Possible Games = {sum(gPower)}')
+
