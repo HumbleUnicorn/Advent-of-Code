@@ -124,21 +124,21 @@ def copyCard(wLib,cLib):
 # =============================================================================
 
 rCard = readCards(test4)
-for lines in rCard:
-    print(lines)    
+# for lines in rCard:
+#     print(lines)    
 
 fWin = findWins(rCard)
-for lines in fWin:
-    print(lines)
+# for lines in fWin:
+#     print(lines)
 
 wLib = winLib(fWin)
-print(wLib)
+# print(wLib)
 
 cLib = cardLib(wLib)
-print(cLib)
+# print(cLib)
 
 cCard = copyCard(wLib,cLib)
-print(cCard)
+# print(cCard)
 
 scoreSum = sumWins(fWin)
 
