@@ -8,21 +8,23 @@
 # =============================================================================
 # Part 1 Outline
 # 
-# GOAL: is digitRange as xRange in rowRange and y in colRange of any symbol in list?
-# 
-# fuction to define number range and value(int)
+# fuction to define number range and value - regex
 #    return [x1, x2, y1, y2, int]
 # 
-# function to define symbol range
-#    return [x1, x2, y1, y2]
+# function to define symbol range - regex
+#    return [x1, x2, y1, y2, sym]
 # 
-# function to check if num is in  symbol range
-#    if True
-#    return [number value]
+# function to check if num is in  symbol range - Counter
+#    return [sum]
 #
 # Part 2 Outline
+# 
+# update function to check if num is in range
+#    return [line], then sum
+# 
+# function to check if sym in range of exactly two num - Counter
+#    return [num1, num2, product], then sum products
 #
-#   
 # =============================================================================
 
 
@@ -156,25 +158,17 @@ print(f'The sum of all gear ratios is {gTest}...and I am (still, theoretically) 
 # =============================================================================
 
 sLib = findSymbols(day3)
-# for sets in sLib:
-#     print(sets)    
-
+    
 dLib = findDigits(day3)
-# for line in dLib:
-#     print(line)
 
 pLib = findParts(dLib,sLib) 
-# for line in pLib:
-#     print(line)
     
-pSum = sumParts(pLib) # Output = 544644 
+pSum = sumParts(pLib) 
 
 print(f'The sum of all part nos. is {pSum}...and I am (for real) the Master of the Universe')
 
 gLib = findGears(pLib,sLib)
-# for line in gLib:
-#     print(line)
 
-gSum = sumGears(gLib) # Output = 84495585
- 
+gSum = sumGears(gLib) 
+
 print(f'The sum of all gear ratios is {gSum}...and I am (still, for real) the Master of the Universe')
