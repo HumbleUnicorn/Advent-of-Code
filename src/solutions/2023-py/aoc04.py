@@ -12,13 +12,21 @@
 #     parse to [str1],[str2] per line (card no. not retained)
 #     regex: parse to [list1],[list2] per line
 # 
-# function to find overlap between two sets
+# function to find winning numbers
 #    Counter: wins = list1 & list2
 #    score = 1*2**n; n = len of wins
-# 
+#    sum scores
+#  
 # Part 2 Outline
 #
-#   
+# winDict with {card no: no of winning numbers on card}
+# copyDict with {card no: no of copies (starts at 1)}
+# function to track copies
+#     for each key in winDict
+#         access number of wins from winDict --> (range) 
+#         access number of copies from copyDict ---> (multiplier, m)
+#         for card in range, increase copies by "m"
+#     sum copyDict values
 # =============================================================================
 
 
@@ -110,8 +118,6 @@ def copyCard(wLib,cLib):
             cLib[c] += m    #increase value of card c by m
     return(cLib)
             
-        
-    
    
 # =============================================================================
 #  // TEST OUTPUT //
