@@ -14,7 +14,7 @@
 # Lower bound: x*(7-x) = 9 ---> x^2 - 7x + 9 = 0 ---> Solve for lowest value of x
 #      a = 1, b = -time, c = distance            ---> LB = next int > x
 #    
-# Number of winning options: LB - (time - LB)    ---> n = len of r (LB,t-LB+1)
+# Number of winning options: LB to (time - LB)    ---> n = len of r (LB,t-LB+1)
 # 
 # // PART 2 //
 # Adjust input as [[t,d]]
@@ -97,7 +97,7 @@ def findWins(inputs):
 
 inputs = raceInfo(test6); #print(inputs)
 
-wins = findWins(inputs); print(wins)
+# wins = findWins(inputs); print(wins)
 
 newInput = newRaceInfo(inputs); #print(newInput)
 
@@ -109,7 +109,7 @@ wins = findWins(newInput); print(wins)
 
 inputs = raceInfo(day6); #print(inputs)
 
-wins = findWins(inputs); print(wins)
+# wins = findWins(inputs); print(wins)
 
 newInput = newRaceInfo(inputs); #print(newInput)
 
