@@ -13,6 +13,7 @@
 
 # # ============================================
 # # find non-alphanumeric characters in a string
+
 # import re
 
 # def find_non_alphanumeric(text):
@@ -54,6 +55,7 @@
 
 # # ============================================
 # # create a dictionary from two lists
+
 # test = [[50,98,2],[52,50,48]]
 # src = []
 # dst = []
@@ -66,6 +68,7 @@
 
 # # ============================================
 # # check id a string contains a digit
+
 # def contains_digits(s):
 #     return any(character.isdigit() for character in s)
 
@@ -85,6 +88,48 @@
 # print(seeds_int)
 
 
+# # ============================================
+# # round float up to the nearest integer
+
+# import math
+# # print(9/7)
+# # print(math.ceil(9/7))
+
+# x=math.ceil(9/7)
+# y=int(7/2)
+# n=len(range(x,y+1))*2
+# print(n)
+
+# x=math.ceil(40/15)
+# y=int(15/2)
+# n=len(range(x,y+1))*2
+# print(n)
 
 
+# # ============================================
+# # messing around with quadratic equations
 
+import math
+
+# coefficients
+a = 1  # coefficient of x^2
+b = -30  # coefficient of x
+c = 200  # constant term
+
+# calculate the discriminant
+D = b**2 - 4*a*c; print(D)
+
+# check if the discriminant is positive, negative, or zero
+if D > 0:
+    x1 = (-b + math.sqrt(D)) / (2*a)
+    x2 = (-b - math.sqrt(D)) / (2*a)
+    print(min(x1,x2))
+elif D == 0:
+    x = -b / (2*a)
+    print(x)
+else:
+    realPart = -b / (2*a)
+    imaginaryPart = math.sqrt(-D) / (2*a)
+    print("The solutions are complex: ", realPart, " + i", imaginaryPart, " and ", realPart, " - i", imaginaryPart)
+    
+ 
