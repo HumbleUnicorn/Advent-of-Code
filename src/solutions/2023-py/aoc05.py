@@ -7,25 +7,25 @@
 # =============================================================================
 # Part 1 Outline
 # 
-# function mapDict ---> Nested Dict {map name: {src No:dst No}}
+# function mapDict ---> Dict {map name: [list of lists]}
 #     for lines:
-#         if line is key, store index location  
-#         if line has digits: send list(ints) to value in stored index location
-#     zip key, value {map name: list of (dst,src,len)}  
-#     for keys:
-#         src range = list of ints from src to src+len 
-#         dst range = list of ints from dst to dst+len
-#     zip src range, dst range {src No:dst No}
-#     dict[key] = nested dict{src No:dst No}
+#         if line is key, {key:[]}  
+#         if line has digits: append list of ints to key value
+#     return dict
 # 
 # function find seed location ---> list of location ints
 #     for n in seeds
-#         for maps:
-#             if n in map, store n as m (else is keep as n)
-#             keep last value of n  
+#         for map in maps:
+#             if start <= n < end:
+#                 modifier (start source - start dest)
+#             n = n - modifier
+#         keep last value of n  
 # find min n   
 #
 # Part 2 Outline
+# 
+# function to expand seed no sets to ranges ---> for no in
+# 
 #
 # =============================================================================
 
@@ -33,7 +33,7 @@
 #  //INPUT DATA//
 # =============================================================================
 
-k = ['seeds:','seed-to-soil map:','soil-to-fertilizer map:','fertilizer-to-water map:','water-to-light map:','light-to-temperature map:','temperature-to-humidity map:','humidity-to-location map:']
+names = ['seed-to-soil map:','soil-to-fertilizer map:','fertilizer-to-water map:','water-to-light map:','light-to-temperature map:','temperature-to-humidity map:','humidity-to-location map:']
 
 test5=[]
 with open('inputs/t05.txt') as f: 
@@ -53,83 +53,159 @@ with open('inputs/d05.txt') as f:
 
 import re
 
-def mapsDict(data,k):
-    v = []
-    for i in range(len(k)):                     #one list per map
-        v.append(list())
-    for line in data:           
-        if line in k:                           #key: fetch & store index
-            j = k.index(line)
-        if any(c.isdigit() for c in line):      #value: fetch & store list of ints
-            n=[]
-            nums = re.finditer(r'\d+', line)
-            for num in nums:
-                n.append(int(num.group()))
-            v[j].append(n)                      
-    maps=dict(zip(k,v))                         #dict: {'map name':[[dst, src, len],[...]}
-    for key in k:
-        if "map" in key:
-            src=[]
-            dst=[]
-            val = maps.get(key)                 
-            for n in val:                       
-                src += list(range(n[1],n[1]+n[2])) #[list all ints in range(src,src+len)]
-                dst += list(range(n[0],n[0]+n[2])) #[list all ints in range(src,src+len)
-            d = dict(zip(src,dst))
-            maps[key]=d 
-        else:
-            maps[key]=maps.get(key)[0]
-    return(maps)
+def mapKeys(mapNames): #for funsies (e.g., readability)
+    abv=[]
+    for name in mapNames:
+        i = name.rfind("-")
+        if i>0:
+            abv.append(name[i+1:i+5])
+    return(abv)
 
-def seedMapsTest(maps,k):
-    seeds = maps.get(k[0])
-    path = []
-    for n in seeds: 
-        line=[n]              
-        for i in range(1,len(k)):  
-            m = maps.get(k[i]) 
-            if n in m:
-                n = m.get(n)
-            line.append([i,n])
-        path.append(line)
+def mapIndex(data,mapNames):
+    index=[]        
+    for name in mapNames:
+        index.append(data.index(name))
+    index.append(len(data))
+    return(index)
+
+def mapsDict(data,index,keys):
+    mDict={}
+    for key in keys:
+        mDict.update({key:[]})
+    i=0
+    while i < len(index)-1:
+        key = keys[i]
+        for j in range(index[i]+1,index[i+1]):
+            line = data[j]
+            key = keys[i]                          
+            if any(c.isdigit() for c in line):      
+                n=[]
+                nums = re.finditer(r'\d+', line)
+                for num in nums:
+                    n.append(int(num.group()))
+                mDict[key].append(n)
+        i+=1                                 
+    return(mDict)
+
+def findSeeds(data):
+    seeds = data[1]
+    seeds_str = seeds.split(' ')
+    seeds_int = list(map(int, seeds_str))
+    return(seeds_int)
+
+def findPath(seeds,keys,maps): # Use for troubleshooting
+    path=[]
+    for n in seeds:
+        p=[n]
+        for k in keys:
+            m=0
+            for r in maps.get(k):
+                if r[1]<=n<(r[1]+r[2]):
+                    m = r[1]-r[0]
+            n = n-m
+            p.append([k,n])
+        path.append(p)
     return(path)
- 
-def seedLocTest(seedMap,sL=[]):
-   for lines in seedMap:
-       n=len(lines)
-       sL.append(lines[n-1][1])
-   return(sL)   
 
-def seedLoc(maps,k):
-    seeds = maps.get(k[0])
-    loc = []
-    for n in seeds:             
-        for i in range(1,len(k)):  
-            m = maps.get(k[i]) 
-            if n in m:
-                n = m.get(n)
-        loc.append(n)
-    return(loc)
+def findLocation(seeds,keys,maps): # Returns locations only
+    end=[]
+    for n in seeds:
+        for k in keys:
+            m=0
+            for r in maps.get(k):
+                if r[1]<=n<(r[1]+r[2]):
+                    m = r[1]-r[0]
+            n = n-m
+        end.append(n)
+    return(end)
+
+def findPairs(seeds):
+    pairs=[]
+    for i in range(len(seeds)):
+        n = seeds[i]
+        if i % 2 == 0: # If number is even
+            line = [n]
+        else:          # If number is odd
+            line += [n]
+            pairs.append(line)
+    return(pairs)
+
+def findPathByPair(pairs,keys,maps): # Use for troubleshooting
+    path=[]
+    for pair in pairs:
+        seeds = range(pair[0],pair[0]+pair[1])
+        for n in seeds:
+            p=[n]
+            for k in keys:
+                m=0
+                for r in maps.get(k):
+                    if r[1]<=n<(r[1]+r[2]):
+                        m = r[1]-r[0]
+                n = n-m
+                p.append([k,n])
+            path.append(p)
+    return(path)
+
+def findLocMin(pairs,keys,maps,minLoc): # Use for troubleshooting
+    for pair in pairs:
+        seeds = range(pair[0],pair[0]+pair[1])
+        for n in seeds:
+            for k in keys:
+                m=0
+                for r in maps.get(k):
+                    if r[1]<=n<(r[1]+r[2]):
+                        m = r[1]-r[0]
+                n = n-m
+            if n < minLoc:
+                minLoc = n
+    return(minLoc)
 
 # =============================================================================
 #  // TEST OUTPUT //
 # =============================================================================
- 
-maps = mapsDict(test5,k); #print(maps)
 
-paths = seedMapsTest(maps,k)
+keys = mapKeys(names); #print(keys)       #define abrv map keys 
 
-locs_test = seedLocTest(paths)
-print(min(locs_test))
+index = mapIndex(test5,names)             #define 
 
-locs = seedLoc(maps,k)
-print(min(locs))
+maps = mapsDict(test5,index,keys)         #parse data into dict 
+
+seeds = findSeeds(test5); #print(seeds)   #define list of seed numbers
+
+# paths = findPath(seeds,keys,maps)       #list: [seed, [key,no], [key,num], ] 
+# for line in paths:
+#     print(line)
+
+locs = findLocation(seeds,keys,maps)
+locMin = min(locs); print(locMin)
+
+pairs = findPairs(seeds); #print(pairs)   #define list of seed pairs
+
+paths = findPathByPair(pairs,keys,maps)   #list: [seed, [key,no], [key,num], ]
+
+minLoc = findLocMin(pairs,keys,maps,locMin)   
+print(minLoc)
            
 # =============================================================================
 #   // PUZZLE OUTPUT //
 # =============================================================================
 
-maps = mapsDict(day5,k); 
+index = mapIndex(day5,names)            
 
-locs = seedLoc(maps,k)
-print(min(locs))
+maps = mapsDict(day5,index,keys); #print(maps)       
+
+seeds = findSeeds(day5); #print(seeds)    
+
+# paths = findPath(seeds,keys,maps)         
+# for line in paths:
+#     print(line)
+    
+locs = findLocation(seeds,keys,maps)
+locMin = min(locs); print(locMin)
+
+pairs = findPairs(seeds); #print(pairs)   #define list of seed pairs
+
+# paths = findPathByPair(pairs,keys,maps)   #list: [seed, [key,no], [key,num], ]
+
+minLoc = findLocMin(pairs,keys,maps,locMin)   
+print(minLoc)
