@@ -27,7 +27,7 @@
 #        increase multiplier by 1
 #    return list of priducts    
 #
-# # // PART 2 //
+# // PART 2 //
 # 
 # Update cLib with new card values
 # 
@@ -111,36 +111,36 @@ def wildValue(hands,wLib,hLib):
         c = list(a.values())
         c = sorted(c, reverse=True)
         j = hand.count('J')
-        if c[0] == 5: 
+        if c[0] == 5:                   # [5]
             h = hLib.get('5K')
-        elif c[0] == 4:
+        elif c[0] == 4:                 # [4,1] J=4, J=1, J=0
             if j > 0:
                 h = hLib.get('5K')
             else: 
                 h = hLib.get('4K')
-        elif c[0] == 3 and c[1]== 2:
+        elif c[0] == 3 and c[1]== 2:    # [3,2] J=3, J=2, J=0
             if j > 0:
                 h = hLib.get('5K')
             else:
                 h = hLib.get('FH')
-        elif c[0] == 3 and c[1]== 1: 
+        elif c[0] == 3 and c[1]== 1:    # [3,1,1] J=3, J=1, J=0
             if j > 0:
                 h = hLib.get('4K')         
             else: 
                 h = hLib.get('3K')  
-        elif c[0] == 2 and c[1]== 2:
+        elif c[0] == 2 and c[1]== 2:    # [2,2,1] J=2, J=1, J=0
             if j == 2:
                 h = hLib.get('4K')
             elif j == 1:
                 h = hLib.get('FH')
             else:
                 h = hLib.get('2P')
-        elif c[0] == 2 and c[1]== 1:
+        elif c[0] == 2 and c[1]== 1:    # [2,1,1,1] J=2, J=1, J=0
                 if j > 0:
                     h = hLib.get('3K')
                 else:
                     h = hLib.get('1P')
-        else:
+        else:                           # [1,1,1,1,1] J=1, J=0
             if j > 0:
                 h = hLib.get('1P')
             else:
@@ -177,6 +177,7 @@ print(sum(ranks))
 wValues = wildValue(hands,wLib,hLib)
 wRanks = handRank(wValues,bids)  
 print(sum(wRanks)) 
+   
    
 # =============================================================================
 #   // PUZZLE OUTPUT //
