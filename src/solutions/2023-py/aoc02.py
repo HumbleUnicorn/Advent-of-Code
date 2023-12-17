@@ -163,22 +163,22 @@ def minPossible(gameData):
 # =============================================================================
 
 gLog = gameLog(test2)
-# for game in gLog:
-#     print(game)  
+for game in gLog:
+    print(game)  
 
 gCounts = gameCounts(gLog)
-# for game in gCounts:
-#     print(game)
+for game in gCounts:
+    print(game)
 
 gIDs = gamesPossible(lim1,gCounts)
-# for game in gIDs:
-#     print(game)
+for game in gIDs:
+    print(game)
     
 print(f'Test Part 1 - Sum of Possible Games = {sum(gIDs)}')
 
 gPower = minPossible(gCounts)
-# for game in gPower:
-#     print(game)
+for game in gPower:
+    print(game)
 print(f'Test Part 2 - Sum of Possible Games = {sum(gPower)}')
 
 
