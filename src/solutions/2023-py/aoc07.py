@@ -4,6 +4,7 @@
 # https://github.com/HumbleUnicorn/Advent-of-Code/blob/main/src/solutions/2023-py/aoc07.py
 # =============================================================================
 
+
 # =============================================================================
 #  // SOLUTION OUTLINE //
 # =============================================================================
@@ -25,7 +26,7 @@
 #    for each line of values:
 #        p = bid * multiplier 
 #        increase multiplier by 1
-#    return list of priducts    
+#    return list of products    
 #
 # // PART 2 //
 # 
@@ -42,6 +43,7 @@
 #        [1,1,1,1,1]: J>0: 1P; else HC
 #        
 # =============================================================================
+
 
 # =============================================================================
 #  //INPUT DATA//
@@ -61,6 +63,7 @@ cLib = {'2':1, '3':2, '4':3, '5':4, '6':5, '7':6, '8':7, '9':8, 'T':9, 'J':10, '
 wLib = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':1, 'Q':11, 'K':12, 'A':13}
 hLib = {'HC':1, '1P':2, '2P':3, '3K':4, 'FH':5, '4K':6, '5K':7}
 
+
 # =============================================================================
 #  // DEFINE FUNCTIONS // 
 # =============================================================================
@@ -72,7 +75,7 @@ def handBid(data):
     for lines in data:
         lines = lines.split(" ")
         hb.update({lines[0]:int(lines[1])})
-    return(hb)
+    return hb
 
 def handValue(hands,cLib,hLib):        
     results=[]
@@ -102,7 +105,7 @@ def handValue(hands,cLib,hLib):
         handVal.append(hand)
         results.append(handVal)
         r = sorted(results)
-    return(r)
+    return r
 
 def wildValue(hands,wLib,hLib):        
     results=[]
@@ -151,7 +154,7 @@ def wildValue(hands,wLib,hLib):
         handVal.append(hand)
         results.append(handVal)
         r = sorted(results)
-    return(r)
+    return r
 
 def handRank(values,bids):
     w=[]
@@ -160,7 +163,7 @@ def handRank(values,bids):
         bid = bids.get(line[6])
         w.append(i*bid)
         i+=1
-    return(w)
+    return w
 
 
 # =============================================================================
