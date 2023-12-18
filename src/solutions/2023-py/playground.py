@@ -109,27 +109,36 @@
 # # ============================================
 # # messing around with quadratic equations
 
-import math
+# import math
 
-# coefficients
-a = 1  # coefficient of x^2
-b = -30  # coefficient of x
-c = 200  # constant term
+# # coefficients
+# a = 1  # coefficient of x^2
+# b = -30  # coefficient of x
+# c = 200  # constant term
 
-# calculate the discriminant
-D = b**2 - 4*a*c; print(D)
+# # calculate the discriminant
+# D = b**2 - 4*a*c; print(D)
 
-# check if the discriminant is positive, negative, or zero
-if D > 0:
-    x1 = (-b + math.sqrt(D)) / (2*a)
-    x2 = (-b - math.sqrt(D)) / (2*a)
-    print(min(x1,x2))
-elif D == 0:
-    x = -b / (2*a)
-    print(x)
-else:
-    realPart = -b / (2*a)
-    imaginaryPart = math.sqrt(-D) / (2*a)
-    print("The solutions are complex: ", realPart, " + i", imaginaryPart, " and ", realPart, " - i", imaginaryPart)
-    
+# # check if the discriminant is positive, negative, or zero
+# if D > 0:
+#     x1 = (-b + math.sqrt(D)) / (2*a)
+#     x2 = (-b - math.sqrt(D)) / (2*a)
+#     print(min(x1,x2))
+# elif D == 0:
+#     x = -b / (2*a)
+#     print(x)
+# else:
+#     realPart = -b / (2*a)
+#     imaginaryPart = math.sqrt(-D) / (2*a)
+#     print("The solutions are complex: ", realPart, " + i", imaginaryPart, " and ", realPart, " - i", imaginaryPart)
+
+
+# ============================================
+# LCM with NumPy
+
+import numpy as np
+
+arr = np.array([3, 6, 9])
+
+x = np.lcm.reduce(arr); print(x)    
  
