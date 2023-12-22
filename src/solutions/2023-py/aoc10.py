@@ -112,8 +112,8 @@ n = len(loop)/2; print(int(n))
 #   // PUZZLE OUTPUT //
 # =============================================================================
 
-# S = wheresWaldo(day10); print(S)
+S = wheresWaldo(day10); print(S)
 
-# loop = findLoop(day10,S); print(loop)
+loop = findLoop(day10,S); print(loop)
 
-# n = len(loop)/2; print(int(n))
+n = len(loop)/2; print(int(n))
