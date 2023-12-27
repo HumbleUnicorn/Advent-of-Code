@@ -136,9 +136,73 @@
 # ============================================
 # LCM with NumPy
 
-import numpy as np
+# import numpy as np
 
-arr = np.array([3, 6, 9])
+# arr = np.array([3, 6, 9])
 
-x = np.lcm.reduce(arr); print(x)    
+# x = np.lcm.reduce(arr); print(x)  
+
+# ============================================
+# Experimenting with floodfill 
+
+
+# def flood_fill_util(x, y, target_color, replacement_color, image):
+#     rows, cols = len(image), len(image[0])
+#     if x < 0 or x >= rows or y < 0 or y >= cols:
+#         return
+#     if image[x][y] != target_color:
+#         return
+#     image[x][y] = replacement_color
+#     flood_fill_util(x-1, y, target_color, replacement_color, image)
+#     flood_fill_util(x+1, y, target_color, replacement_color, image)
+#     flood_fill_util(x, y-1, target_color, replacement_color, image)
+#     flood_fill_util(x, y+1, target_color, replacement_color, image)
+
+# def flood_fill(x, y, replacement_color, image):
+#     target_color = image[x][y]
+#     if target_color != replacement_color:
+#         flood_fill_util(x, y, target_color, replacement_color, image)
+        
+# if __name__ == "__main__":
+#     image = [ [1,1,1,1,1,1,1,1,1,1],
+#        [1,1,1,1,1,1,1,1,1,1],
+#        [1,1,1,1,1,0,0,1,1,1],
+#        [1,1,1,0,0,0,0,0,1,1],
+#        [1,1,1,0,1,0,0,1,1,1],
+#        [1,1,1,0,0,1,0,1,1,1],
+#        [1,1,1,0,0,0,0,1,1,1],
+#        [1,1,0,0,0,1,1,1,1,1],
+#        [1,1,1,1,0,1,1,1,1,1],
+#        [1,1,1,1,1,1,1,1,1,1] ]
  
+   
+ 
+#     x = 3
+#     y = 3
+#     m=10
+#     n=10
+#     replacement_color=2
+#     print("Original Image: \n")
+#     for i in range(m):
+#         for j in range(n):
+#             print(image[i][j], end=" ")
+#         print()
+#     flood_fill(x, y, replacement_color, image)
+    
+#     # Printing the updated screen
+#     print("\nColored Image: \n")
+#     for i in range(m):
+#         for j in range(n):
+#             print(image[i][j], end=" ")
+#         print()  
+ 
+types = {'N': ["┌","|","┐"], 'E': ["┘","─","┐"], 'S': ["└","|","┘"], 'W': ["└","─","┌"], '┘': ['N','W'], '└': ['N','E'], '┌': ['E','S'], '┐': ['S','W'], '|': ['N','S'], '─': ['E','W']}
+
+if "┌" in types.get('N'):
+    print("yes")
+    
+    
+loop = [[2, 0], [2, 1], [1, 1], [1, 2], [0, 2], [0, 3], [1, 3], [2, 3], [2, 4], [3, 4], [3, 3], 
+[3, 2], [3, 1], [4, 1], [4, 0], [3, 0]]
+
+print(loop[1],loop[-1])
