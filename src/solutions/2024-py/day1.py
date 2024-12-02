@@ -35,7 +35,7 @@ def readSrc (fname):
             line = line.strip()
             line = line.split('   ')
             data.append(line)
-        return(data) # ===> <list>
+        return(data) 
 
 def parseData(data):
     left = []; right = []
