@@ -37,7 +37,7 @@
 # =============================================================================
 
 day1=[]
-with open('inputs/d01.txt') as f:
+with open('ignore/d01.txt') as f:
     for lines in f:
         day1.append(lines)
 
