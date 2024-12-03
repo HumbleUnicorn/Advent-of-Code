@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['src\\solutions\\2024-py\\day1.py', 'src\\solutions\\2024-py\\ignore\\aoc template.py', 'src\\solutions\\2024-py\\ignore\\playground.py', 'src\\solutions\\2024-py\\ignore\\day1.txt', 'src\\solutions\\2024-py\\ignore\\day1_test.txt']
+recent_files = ['src\\solutions\\2024-py\\day2.py']
 
 [main]
 version = 0.2.0

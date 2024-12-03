@@ -16,7 +16,7 @@
 # (3) num_pass = 0; +=1 if scan = True
 #
 # // PART 2 //
-# (1) modify parse to list of lists [[list], [list.pop(i)], etc.]
+# (1) modify parse to list of lists [[list],[list.pop(0)],[list.pop(1)], ...]
 # (2) scan list in line ==> if any True, return True
 # (3) num_pass = 0; +=1 if scan = True
 #        
