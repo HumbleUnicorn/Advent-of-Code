@@ -16,7 +16,6 @@
 #        \,: "," seperator literal
 #        (\d{1-3}): 2nd num
 #        \): ")" ending literal
-#        Rule 2: abs(diff) <= 3 ==> return True
 # (3) append 1st_num*2nd_num to list ==> return sum
 #
 # // PART 2 //
