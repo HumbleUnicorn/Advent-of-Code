@@ -1,6 +1,6 @@
 # =============================================================================
 # Ruth Wertz
-# AOC 2024 - Day 7
+# AOC 2024 - Day 8
 # https://github.com/HumbleUnicorn/Advent-of-Code/tree/main/src/solutions/2024-py
 # =============================================================================
 
@@ -9,12 +9,14 @@
 # =============================================================================
 #
 # // PART 1 //
-# (1) parse to list of results and list of values
-# (2) enumerate trials (possible combinations of operators)
-# (3) if trial == result, resultSum += result
+# (1) find unique chars in string --> return counter
+# (2) enumerate all pairs 
+# (3) pair = b, c nodes = a, d where a = 2b-c and d = 2c-b
+# (4) if node on map append to list --> return len(list(set(list)))
 #
 # // PART 2 //
-# (1) Update operators to include concat (a <opp> b --> int(ab))
+# (1) while a is on map, shift b, c = a, b
+# (2) while d is on map, shift b, c = c, d
 #        
 # =============================================================================
 
